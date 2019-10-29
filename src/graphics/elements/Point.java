@@ -116,8 +116,8 @@ public class Point {
     }
 
 
-    public void scale(double[] scale) {
-        double[] newLocation = applyOperation(getOperationScale(scale), true);
+    public void worldScale(double[] scale) {
+        double[] newLocation = applyOperation(getOperationScale(scale));
 
         // scale X,Y,Z by ObjectScale
         newLocation[0] *= newLocation[3];
@@ -125,6 +125,17 @@ public class Point {
         newLocation[2] *= newLocation[3];
 
         setWorldLocation(newLocation);
+    }
+
+    public void localScale(double[] scale) {
+        double[] newLocation = applyOperation(getOperationScale(scale), false);
+
+        // scale X,Y,Z by ObjectScale
+        newLocation[0] *= newLocation[3];
+        newLocation[1] *= newLocation[3];
+        newLocation[2] *= newLocation[3];
+
+        setLocalLocation(newLocation);
     }
 
 

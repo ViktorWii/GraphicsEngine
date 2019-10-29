@@ -20,7 +20,7 @@ public class Main extends Application {
 
         // init app
         primaryStage.setTitle("Graphics Engine");
-        primaryStage.setScene(new Scene(root, 600, 500));
+        primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
 
 

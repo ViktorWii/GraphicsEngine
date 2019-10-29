@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.engine.Controller">
+<AnchorPane prefHeight="601.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.engine.Controller">
    <children>
       <Group fx:id="Location" layoutX="427.0" layoutY="27.0">
          <children>
@@ -41,10 +41,10 @@
             <Text layoutX="-4.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" />
          </children>
       </Group>
-      <ChoiceBox fx:id="ViewMode" layoutX="14.0" layoutY="442.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="ViewMode" layoutX="132.0" layoutY="442.0" prefWidth="150.0" />
       <Group fx:id="Scale" layoutX="427.0" layoutY="346.0">
          <children>
-            <Text layoutX="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scale" wrappingWidth="27.205078125" />
+            <Text layoutX="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="World Scale" wrappingWidth="71.205078125" />
             <Slider fx:id="ScaleX" layoutX="19.0" layoutY="12.0" max="3.0" min="1.0" />
             <Text layoutX="-4.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
             <Slider fx:id="ScaleY" layoutX="19.0" layoutY="34.0" max="3.0" min="1.0" />
@@ -55,5 +55,21 @@
             <Text layoutX="-4.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H" />
          </children>
       </Group>
+      <Group fx:id="LocalScale" layoutX="427.0" layoutY="467.0">
+         <children>
+            <Text layoutX="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Local Scale" wrappingWidth="67.205078125" />
+            <Slider fx:id="LocalScaleX" layoutX="19.0" layoutY="12.0" max="3.0" min="1.0" />
+            <Text layoutX="-4.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+            <Slider fx:id="LocalScaleY" layoutX="19.0" layoutY="34.0" max="3.0" min="1.0" />
+            <Text layoutX="-4.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y" />
+            <Slider fx:id="LocalScaleZ" layoutX="19.0" layoutY="56.0" max="3.0" min="1.0" />
+            <Text layoutX="-4.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" />
+            <Slider fx:id="LocalScaleH" layoutX="19.0" layoutY="77.0" max="3.0" min="1.0" />
+            <Text layoutX="-4.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H" />
+         </children>
+      </Group>
+      <Text layoutX="24.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Mode" />
+      <Text layoutX="24.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Pyramid" />
+      <ChoiceBox fx:id="SelectedPyramid" layoutX="132.0" layoutY="505.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

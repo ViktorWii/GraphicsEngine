@@ -52,7 +52,7 @@ public class Polygon {
 
     public void scale(double[] scale) {
         for (Point vertex : vertices) {
-            vertex.scale(scale);
+            vertex.worldScale(scale);
         }
     }
 }

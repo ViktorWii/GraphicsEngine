@@ -19,7 +19,7 @@ public class Figure {
             for (Point point : polygon.vertices) {
                 point.figure = this;
 
-                Edge edge = new Edge(previousPoint,point);
+                Edge edge = new Edge(previousPoint, point);
                 edges.add(edge);
 
                 vertices.add(point);
@@ -86,11 +86,17 @@ public class Figure {
         }
     }
 
-    public void scale(double[] scale) {
-        pivotPoint.scale(scale);
+    public void worldScale(double[] scale) {
+        pivotPoint.worldScale(scale);
 
         for (Point vertex : vertices) {
-            vertex.scale(scale);
+            vertex.worldScale(scale);
+        }
+    }
+
+    public void localScale(double[] scale) {
+        for (Point vertex : vertices) {
+            vertex.localScale(scale);
         }
     }
 }

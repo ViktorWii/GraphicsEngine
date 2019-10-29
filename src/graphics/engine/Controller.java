@@ -23,8 +23,15 @@ public class Controller {
     public Slider ScaleZ;
     public Slider ScaleH;
 
-    public ChoiceBox ViewMode;
+    public Slider LocalScaleX;
+    public Slider LocalScaleY;
+    public Slider LocalScaleZ;
+    public Slider LocalScaleH;
 
+
+
+    public ChoiceBox ViewMode;
+    public ChoiceBox SelectedPyramid;
 
 
     public Figure activeFigure;
@@ -52,6 +59,7 @@ public class Controller {
         setUpWorldRotation();
         setUpLocalRotation();
         setUpScale();
+        setUpLocalScale();
     }
 
     private void setUpLocation() {
@@ -117,26 +125,53 @@ public class Controller {
     private void setUpScale() {
         ScaleX.valueProperty().addListener((observable, oldValue, newValue) -> {
             double delta = newValue.doubleValue() / oldValue.doubleValue();
-            activeFigure.scale(new double[]{delta, 1, 1, 1});
+            activeFigure.worldScale(new double[]{delta, 1, 1, 1});
             scene3D.updateViewport();
         });
 
         ScaleY.valueProperty().addListener((observable, oldValue, newValue) -> {
             double delta = newValue.doubleValue() / oldValue.doubleValue();
-            activeFigure.scale(new double[]{1, delta, 1, 1});
+            activeFigure.worldScale(new double[]{1, delta, 1, 1});
             scene3D.updateViewport();
         });
 
         ScaleZ.valueProperty().addListener((observable, oldValue, newValue) -> {
             double delta = newValue.doubleValue() / oldValue.doubleValue();
-            activeFigure.scale(new double[]{1, 1, delta, 1});
+            activeFigure.worldScale(new double[]{1, 1, delta, 1});
             scene3D.updateViewport();
         });
 
         ScaleH.valueProperty().addListener((observable, oldValue, newValue) -> {
             double delta = newValue.doubleValue() / oldValue.doubleValue();
-            activeFigure.scale(new double[]{1, 1, 1, delta});
+            activeFigure.worldScale(new double[]{1, 1, 1, delta});
             scene3D.updateViewport();
         });
     }
+
+    private void setUpLocalScale() {
+        LocalScaleX.valueProperty().addListener((observable, oldValue, newValue) -> {
+            double delta = newValue.doubleValue() / oldValue.doubleValue();
+            activeFigure.localScale(new double[]{delta, 1, 1, 1});
+            scene3D.updateViewport();
+        });
+
+        LocalScaleY.valueProperty().addListener((observable, oldValue, newValue) -> {
+            double delta = newValue.doubleValue() / oldValue.doubleValue();
+            activeFigure.localScale(new double[]{1, delta, 1, 1});
+            scene3D.updateViewport();
+        });
+
+        LocalScaleZ.valueProperty().addListener((observable, oldValue, newValue) -> {
+            double delta = newValue.doubleValue() / oldValue.doubleValue();
+            activeFigure.localScale(new double[]{1, 1, delta, 1});
+            scene3D.updateViewport();
+        });
+
+        LocalScaleH.valueProperty().addListener((observable, oldValue, newValue) -> {
+            double delta = newValue.doubleValue() / oldValue.doubleValue();
+            activeFigure.localScale(new double[]{1, 1, 1, delta});
+            scene3D.updateViewport();
+        });
+    }
+
 }
