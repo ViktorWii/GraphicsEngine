@@ -34,19 +34,19 @@ public class Polygon {
 
     public void rotateX(double angle) {
         for (Point vertex : vertices) {
-            vertex.rotateX(angle);
+            vertex.rotateWorldX(angle);
         }
     }
 
     public void rotateY(double angle) {
         for (Point vertex : vertices) {
-            vertex.rotateY(angle);
+            vertex.rotateWorldY(angle);
         }
     }
 
     public void rotateZ(double angle) {
         for (Point vertex : vertices) {
-            vertex.rotateZ(angle);
+            vertex.rotateWorldZ(angle);
         }
     }
 

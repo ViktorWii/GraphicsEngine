@@ -38,7 +38,8 @@ public class Controller {
     }
 
     private void setUpViewModes() {
-        ViewMode.getItems().addAll("FRONT", "RIGHT", "TOP", "ONE_POINT_PERSPECTIVE");
+        ViewMode.getItems().addAll("FRONT", "RIGHT", "TOP", "PERSPECTIVE");
+        ViewMode.setValue("PERSPECTIVE");
 
         ViewMode.valueProperty().addListener((observable, oldValue, newValue) -> {
             scene3D.viewMode = View.valueOf(newValue.toString());
@@ -49,6 +50,7 @@ public class Controller {
     private void setUpSliders() {
         setUpLocation();
         setUpWorldRotation();
+        setUpLocalRotation();
         setUpScale();
     }
 
@@ -75,19 +77,39 @@ public class Controller {
     private void setUpWorldRotation() {
         WorldRotationX.valueProperty().addListener((observable, oldValue, newValue) -> {
             double angle = newValue.doubleValue() - oldValue.doubleValue();
-            activeFigure.rotateX(angle);
+            activeFigure.rotateWorldX(angle);
             scene3D.updateViewport();
         });
 
         WorldRotationY.valueProperty().addListener((observable, oldValue, newValue) -> {
             double angle = newValue.doubleValue() - oldValue.doubleValue();
-            activeFigure.rotateY(angle);
+            activeFigure.rotateWorldY(angle);
             scene3D.updateViewport();
         });
 
         WorldRotationZ.valueProperty().addListener((observable, oldValue, newValue) -> {
             double angle = newValue.doubleValue() - oldValue.doubleValue();
-            activeFigure.rotateZ(angle);
+            activeFigure.rotateWorldZ(angle);
+            scene3D.updateViewport();
+        });
+    }
+
+    private void setUpLocalRotation() {
+        LocalRotationX.valueProperty().addListener((observable, oldValue, newValue) -> {
+            double angle = newValue.doubleValue() - oldValue.doubleValue();
+            activeFigure.rotateLocalX(angle);
+            scene3D.updateViewport();
+        });
+
+        LocalRotationY.valueProperty().addListener((observable, oldValue, newValue) -> {
+            double angle = newValue.doubleValue() - oldValue.doubleValue();
+            activeFigure.rotateLocalY(angle);
+            scene3D.updateViewport();
+        });
+
+        LocalRotationZ.valueProperty().addListener((observable, oldValue, newValue) -> {
+            double angle = newValue.doubleValue() - oldValue.doubleValue();
+            activeFigure.rotateLocalZ(angle);
             scene3D.updateViewport();
         });
     }

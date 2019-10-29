@@ -1,6 +1,8 @@
 package graphics.elements;
 
 public class Point {
+    Figure figure;
+
     // Z position of Camera
     private double z0 = 100;
 
@@ -10,18 +12,10 @@ public class Point {
     public double z;
     public double h = 1;
 
-    public double local_x;
-    public double local_y;
-    public double local_z;
-
     public Point(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
-
-        local_x = x;
-        local_y = y;
-        local_z = z;
     }
 
     public double[] getWorldLocation() {
@@ -29,22 +23,31 @@ public class Point {
     }
 
     public double[] getLocalLocation() {
-        return new double[]{x, y, z, h};
+        double[] figureLocation = figure.pivotPoint.getWorldLocation();
+        double[] pointLocation = getWorldLocation();
+        double[] localLocation = new double[]{
+                pointLocation[0] - figureLocation[0],
+                pointLocation[1] - figureLocation[1],
+                pointLocation[2] - figureLocation[2],
+                pointLocation[3]
+        };
+
+        return localLocation;
     }
 
-    public void setWorldLocation(double[] position) {
-        x = position[0];
-        y = position[1];
-        z = position[2];
+    public void setWorldLocation(double[] newLocation) {
+        x = newLocation[0];
+        y = newLocation[1];
+        z = newLocation[2];
     }
 
-    public void setLocalLocation(double[] position) {
-        local_x = position[0];
-        local_y = position[1];
-        local_z = position[2];
-
-        setWorldLocation(new double[]{x + local_x, y + local_y, z + local_z});
+    public void setLocalLocation(double[] newLocation) {
+        double[] localLocation = getLocalLocation();
+        x += newLocation[0] - localLocation[0];
+        y += newLocation[1] - localLocation[1];
+        z += newLocation[2] - localLocation[2];
     }
+
 
 
     public double[] getProjection(View viewMode) {
@@ -58,7 +61,7 @@ public class Point {
             case RIGHT: {
                 return new double[]{x, z};
             }
-            case ONE_POINT_PERSPECTIVE: {
+            case PERSPECTIVE: {
                 double[] projection = applyOperation(getOperationOnePointPerspectiveProject());
                 return new double[]{projection[0] / projection[3], projection[1] / projection[3]};
             }
@@ -73,28 +76,55 @@ public class Point {
         setWorldLocation(newLocation);
     }
 
-    public void rotateX(double angle) {
+
+    public void rotateWorldX(double angle) {
         double radians = angle * Math.PI / 180;
         double[] newLocation = applyOperation(getOperationRotateX(radians));
         setWorldLocation(newLocation);
     }
 
-    public void rotateY(double angle) {
+    public void rotateWorldY(double angle) {
 
         double radians = angle * Math.PI / 180;
         double[] newLocation = applyOperation(getOperationRotateY(radians));
         setWorldLocation(newLocation);
     }
 
-    public void rotateZ(double angle) {
+    public void rotateWorldZ(double angle) {
         double radians = angle * Math.PI / 180;
         double[] newLocation = applyOperation(getOperationRotateZ(radians));
         setWorldLocation(newLocation);
     }
 
-    public void scale(double[] scale) {
-        double[] newLocation = applyOperation(getOperationScale(scale), false);
+
+    public void rotateLocalX(double angle) {
+        double radians = angle * Math.PI / 180;
+        double[] newLocation = applyOperation(getOperationRotateX(radians), false);
         setLocalLocation(newLocation);
+    }
+
+    public void rotateLocalY(double angle) {
+        double radians = angle * Math.PI / 180;
+        double[] newLocation = applyOperation(getOperationRotateY(radians), false);
+        setLocalLocation(newLocation);
+    }
+
+    public void rotateLocalZ(double angle) {
+        double radians = angle * Math.PI / 180;
+        double[] newLocation = applyOperation(getOperationRotateZ(radians), false);
+        setLocalLocation(newLocation);
+    }
+
+
+    public void scale(double[] scale) {
+        double[] newLocation = applyOperation(getOperationScale(scale), true);
+
+        // scale X,Y,Z by ObjectScale
+        newLocation[0] *= newLocation[3];
+        newLocation[1] *= newLocation[3];
+        newLocation[2] *= newLocation[3];
+
+        setWorldLocation(newLocation);
     }
 
 
