@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.engine.Controller">
+   <children>
+      <Group fx:id="Location" layoutX="427.0" layoutY="27.0">
+         <children>
+            <Text layoutX="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
+            <Slider fx:id="LocationX" layoutX="19.0" layoutY="12.0" max="50.0" min="-50.0" />
+            <Text layoutX="-4.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+            <Slider fx:id="LocationY" layoutX="19.0" layoutY="34.0" max="50.0" min="-50.0" />
+            <Text layoutX="-4.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y" />
+            <Slider fx:id="LocationZ" layoutX="19.0" layoutY="56.0" max="50.0" min="-50.0" />
+            <Text layoutX="-4.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" />
+         </children>
+      </Group>
+      <Group fx:id="WorldRotation" layoutX="427.0" layoutY="133.0">
+         <children>
+            <Text layoutX="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="World Rotation" />
+            <Slider fx:id="WorldRotationX" layoutX="19.0" layoutY="12.0" max="360.0" />
+            <Text layoutX="-4.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+            <Slider fx:id="WorldRotationY" layoutX="19.0" layoutY="34.0" max="360.0" />
+            <Text layoutX="-4.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y" />
+            <Slider fx:id="WorldRotationZ" layoutX="19.0" layoutY="56.0" max="360.0" />
+            <Text layoutX="-4.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" />
+         </children>
+      </Group>
+      <Group fx:id="LocalRotation" layoutX="427.0" layoutY="242.0">
+         <children>
+            <Text layoutX="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Local Rotation" />
+            <Slider fx:id="LocalRotationX" layoutX="19.0" layoutY="12.0" max="360.0" />
+            <Text layoutX="-4.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+            <Slider fx:id="LocalRotationY" layoutX="19.0" layoutY="34.0" max="360.0" />
+            <Text layoutX="-4.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y" />
+            <Slider fx:id="LocalRotationZ" layoutX="19.0" layoutY="56.0" max="360.0" />
+            <Text layoutX="-4.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" />
+         </children>
+      </Group>
+      <ChoiceBox fx:id="ViewMode" layoutX="14.0" layoutY="442.0" prefWidth="150.0" />
+      <Group fx:id="Scale" layoutX="427.0" layoutY="346.0">
+         <children>
+            <Text layoutX="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scale" wrappingWidth="27.205078125" />
+            <Slider fx:id="ScaleX" layoutX="19.0" layoutY="12.0" max="3.0" min="1.0" />
+            <Text layoutX="-4.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
+            <Slider fx:id="ScaleY" layoutX="19.0" layoutY="34.0" max="3.0" min="1.0" />
+            <Text layoutX="-4.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y" />
+            <Slider fx:id="ScaleZ" layoutX="19.0" layoutY="56.0" max="3.0" min="1.0" />
+            <Text layoutX="-4.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z" />
+            <Slider fx:id="ScaleH" layoutX="19.0" layoutY="77.0" max="3.0" min="1.0" />
+            <Text layoutX="-4.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H" />
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
