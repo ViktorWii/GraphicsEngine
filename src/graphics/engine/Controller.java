@@ -29,7 +29,6 @@ public class Controller {
     public Slider LocalScaleH;
 
 
-
     public ChoiceBox ViewMode;
     public ChoiceBox SelectedPyramid;
 
@@ -41,6 +40,7 @@ public class Controller {
 
     public void setUpApp() {
         setUpViewModes();
+        setUpFigures();
         setUpSliders();
     }
 
@@ -51,6 +51,24 @@ public class Controller {
         ViewMode.valueProperty().addListener((observable, oldValue, newValue) -> {
             scene3D.viewMode = View.valueOf(newValue.toString());
             scene3D.updateViewport();
+        });
+    }
+
+    private void setUpFigures() {
+        SelectedPyramid.getItems().addAll("First", "Second");
+        SelectedPyramid.setValue("First");
+
+        SelectedPyramid.valueProperty().addListener((observable, oldValue, newValue) -> {
+            switch (newValue.toString()) {
+                case "First": {
+                    activeFigure = scene3D.firstPyramid;
+                    break;
+                }
+                case "Second": {
+                    activeFigure = scene3D.secondPyramid;
+                    break;
+                }
+            }
         });
     }
 

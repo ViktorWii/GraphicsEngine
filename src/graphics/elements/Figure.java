@@ -68,6 +68,7 @@ public class Figure {
         }
     }
 
+
     public void rotateLocalX(double angle) {
         for (Point vertex : vertices) {
             vertex.rotateLocalX(angle);
@@ -86,6 +87,7 @@ public class Figure {
         }
     }
 
+
     public void worldScale(double[] scale) {
         pivotPoint.worldScale(scale);
 
@@ -99,4 +101,53 @@ public class Figure {
             vertex.localScale(scale);
         }
     }
+
+
+    public double[][] getBodyMatrix() {
+        double[] pointLocation = getPointInCenter();
+
+        double[][] matrix = new double[polygons.size()][4];
+
+        for (int i = 0; i < polygons.size(); i++) {
+            double[] planeEquation = polygons.get(i).getPlaneEquation();
+            planeEquation = checkPlaneEquation(planeEquation, pointLocation);
+            matrix[i] = planeEquation;
+        }
+
+        return matrix;
+    }
+
+
+    private double[] getPointInCenter() {
+        double[] center = new double[3];
+        for (Point vertex : vertices) {
+            center[0] += vertex.x;
+            center[1] += vertex.y;
+            center[2] += vertex.z;
+        }
+        center[0] = center[0] / vertices.size();
+        center[1] = center[1] / vertices.size();
+        center[2] = center[2] / vertices.size();
+
+        return center;
+    }
+
+
+    public double[] checkPlaneEquation(double[] planeEquation, double[] pointLocation) {
+        if (dotProduct(planeEquation, pointLocation) < 0) {
+            planeEquation[0] = -planeEquation[0];
+            planeEquation[1] = -planeEquation[1];
+            planeEquation[2] = -planeEquation[2];
+            planeEquation[3] = -planeEquation[3];
+        }
+
+        return planeEquation;
+    }
+
+
+    public double dotProduct(double[] first, double[] second) {
+        return first[0] * second[0] + first[1] * second[1] + first[2] * second[2];
+    }
+
 }
+

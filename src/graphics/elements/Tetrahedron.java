@@ -8,6 +8,12 @@ public class Tetrahedron extends Figure {
         super(polygons);
     }
 
+
+    public Tetrahedron(double edgeLength, Point pivotPoint) {
+        this(edgeLength);
+        this.pivotPoint = pivotPoint;
+    }
+
     public Tetrahedron(double edgeLength) {
         super(new ArrayList<Polygon>());
 
