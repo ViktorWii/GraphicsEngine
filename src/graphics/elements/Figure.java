@@ -32,6 +32,17 @@ public class Figure {
         }
     }
 
+    public Figure(ArrayList<Point> vertices, ArrayList<Edge> edges, ArrayList<Polygon> polygons) {
+        pivotPoint = new Point(0, 0, 0);
+
+        this.vertices.addAll(vertices);
+        this.edges.addAll(edges);
+        this.polygons.addAll(polygons);
+
+        for (Point vertex: vertices) {
+            vertex.figure = this;
+        }
+    }
 
 
 
@@ -104,13 +115,19 @@ public class Figure {
 
 
     public double[][] getBodyMatrix() {
-        double[] pointLocation = getPointInCenter();
+        double[] centerLocation = getCenterLocation();
 
         double[][] matrix = new double[polygons.size()][4];
 
         for (int i = 0; i < polygons.size(); i++) {
             double[] planeEquation = polygons.get(i).getPlaneEquation();
-            planeEquation = checkPlaneEquation(planeEquation, pointLocation);
+            double[] facePointLocation = polygons.get(i).vertices.get(0).getWorldLocation();
+            double[] centerVector = new double[]{
+                    facePointLocation[0] - centerLocation[0],
+                    facePointLocation[1] - centerLocation[1],
+                    facePointLocation[2] - centerLocation[2]
+            };
+            planeEquation = checkPlaneEquation(planeEquation, centerVector);
             matrix[i] = planeEquation;
         }
 
@@ -118,7 +135,7 @@ public class Figure {
     }
 
 
-    private double[] getPointInCenter() {
+    private double[] getCenterLocation() {
         double[] center = new double[3];
         for (Point vertex : vertices) {
             center[0] += vertex.x;
@@ -146,7 +163,8 @@ public class Figure {
 
 
     public double dotProduct(double[] first, double[] second) {
-        return first[0] * second[0] + first[1] * second[1] + first[2] * second[2];
+        double result = first[0] * second[0] + first[1] * second[1] + first[2] * second[2];
+        return result;
     }
 
 }

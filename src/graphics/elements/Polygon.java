@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Polygon {
-    ArrayList<Point> vertices;
-    ArrayList<Edge> edges;
+    public ArrayList<Point> vertices;
+    public ArrayList<Edge> edges;
 
     public Polygon(Point p1, Point p2, Point p3) {
         this(new Point[]{p1, p2, p3});
-        this.vertices = new ArrayList<Point>();
-        vertices.add(p1);
-        vertices.add(p2);
-        vertices.add(p3);
     }
 
     public Polygon(ArrayList<Point> vertices) {
@@ -46,7 +42,7 @@ public class Polygon {
         double[] v3 = secondEdge.secondPoint.getWorldLocation();
 
         planeEquation[0] = (v2[1] - v1[1]) * (v3[2] - v1[2]) - (v2[2] - v1[2]) * (v3[1] - v1[1]);
-        planeEquation[1] = (v2[2] - v1[2]) * (v3[0] - v1[0]) - (v2[0] - v1[0]) * (v3[2] - v3[1]);
+        planeEquation[1] = (v2[2] - v1[2]) * (v3[0] - v1[0]) - (v2[0] - v1[0]) * (v3[2] - v1[2]);
         planeEquation[2] = (v2[0] - v1[0]) * (v3[1] - v1[1]) - (v2[1] - v1[1]) * (v3[0] - v1[0]);
         planeEquation[3] = -(planeEquation[0] * v1[0] + planeEquation[1] * v1[1] + planeEquation[2] * v1[2]);
 

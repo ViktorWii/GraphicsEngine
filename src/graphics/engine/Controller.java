@@ -2,6 +2,7 @@ package graphics.engine;
 
 import graphics.elements.Figure;
 import graphics.elements.View;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 
@@ -32,6 +33,8 @@ public class Controller {
     public ChoiceBox ViewMode;
     public ChoiceBox SelectedPyramid;
 
+    public CheckBox InvisibleEdges;
+
 
     public Figure activeFigure;
 
@@ -39,10 +42,23 @@ public class Controller {
 
 
     public void setUpApp() {
+        setUpInvisibleEdges();
         setUpViewModes();
         setUpFigures();
         setUpSliders();
     }
+
+
+
+
+    private void setUpInvisibleEdges(){
+        InvisibleEdges.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            scene3D.drawInvisibleEdges = newValue;
+            scene3D.updateViewport();
+        });
+    }
+
+
 
     private void setUpViewModes() {
         ViewMode.getItems().addAll("FRONT", "RIGHT", "TOP", "PERSPECTIVE");
@@ -72,6 +88,8 @@ public class Controller {
         });
     }
 
+
+
     private void setUpSliders() {
         setUpLocation();
         setUpWorldRotation();
@@ -83,19 +101,19 @@ public class Controller {
     private void setUpLocation() {
         LocationX.valueProperty().addListener((observable, oldValue, newValue) -> {
             double offset = newValue.doubleValue() - oldValue.doubleValue();
-            activeFigure.translate(new double[]{offset, 0, 0});
+            activeFigure.translate(new double[]{offset, 0, 0, 1});
             scene3D.updateViewport();
         });
 
         LocationY.valueProperty().addListener((observable, oldValue, newValue) -> {
             double offset = newValue.doubleValue() - oldValue.doubleValue();
-            activeFigure.translate(new double[]{0, offset, 0});
+            activeFigure.translate(new double[]{0, offset, 0, 1});
             scene3D.updateViewport();
         });
 
         LocationZ.valueProperty().addListener((observable, oldValue, newValue) -> {
             double offset = newValue.doubleValue() - oldValue.doubleValue();
-            activeFigure.translate(new double[]{0, 0, offset});
+            activeFigure.translate(new double[]{0, 0, offset, 1});
             scene3D.updateViewport();
         });
     }

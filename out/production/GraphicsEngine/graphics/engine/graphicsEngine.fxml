@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -69,7 +70,8 @@
          </children>
       </Group>
       <Text layoutX="24.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Mode" />
-      <Text layoutX="24.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Pyramid" />
+      <Text layoutX="15.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Figure" />
       <ChoiceBox fx:id="SelectedPyramid" layoutX="132.0" layoutY="505.0" prefWidth="150.0" />
+      <CheckBox fx:id="InvisibleEdges" layoutX="24.0" layoutY="546.0" mnemonicParsing="false" text="draw invisible edges" />
    </children>
 </AnchorPane>
