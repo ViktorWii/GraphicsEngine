@@ -6,9 +6,16 @@ import java.util.Arrays;
 public class Polygon {
     public ArrayList<Point> vertices;
     public ArrayList<Edge> edges;
+    public ArrayList<Integer> indices;
 
     public Polygon(Point p1, Point p2, Point p3) {
         this(new Point[]{p1, p2, p3});
+    }
+
+
+    public Polygon(ArrayList<Point> vertices, ArrayList<Integer> indices) {
+        this(vertices.toArray(new Point[vertices.size()]));
+        this.indices = indices;
     }
 
     public Polygon(ArrayList<Point> vertices) {

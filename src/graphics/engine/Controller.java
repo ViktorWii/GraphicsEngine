@@ -1,10 +1,19 @@
 package graphics.engine;
 
 import graphics.elements.Figure;
+import graphics.elements.Point;
+import graphics.elements.Polygon;
 import graphics.elements.View;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 public class Controller {
     public Slider LocationX;
@@ -35,14 +44,59 @@ public class Controller {
 
     public CheckBox InvisibleEdges;
 
+    public Button SaveButton;
+
+
 
     public Figure activeFigure;
 
     public Scene3D scene3D;
 
 
+    public void saveToFile() {
+        try {
+            Writer writer = new FileWriter("figure.txt");
+
+            // Количество вершин
+            writer.write(Integer.toString(activeFigure.vertices.size()));
+            writer.write(System.getProperty("line.separator"));
+
+            // Координаты вершин
+            for (Point vertex : activeFigure.vertices) {
+                writer.write(Double.toString(vertex.x));
+                writer.write(", ");
+                writer.write(Double.toString(vertex.y));
+                writer.write(", ");
+                writer.write(Double.toString(vertex.z));
+                writer.write(";");
+                writer.write(System.getProperty("line.separator"));
+            }
+
+
+
+            // Количество граней
+            writer.write(Integer.toString(activeFigure.polygons.size()));
+            writer.write(System.getProperty("line.separator"));
+
+            // Индексы вершин в гранях
+            for (Polygon polygon : activeFigure.polygons) {
+                writer.write(polygon.indices.toString());
+                writer.write(System.getProperty("line.separator"));
+            }
+
+            writer.write(System.getProperty("line.separator"));
+            writer.close();
+        } catch (IOException e) {
+            System.console().printf("failed to save to file");
+        }
+
+    }
+
+
     public void setUpApp() {
         setUpInvisibleEdges();
+        setUpSaveButton();
+
         setUpViewModes();
         setUpFigures();
         setUpSliders();
@@ -50,8 +104,19 @@ public class Controller {
 
 
 
+    private void setUpSaveButton() {
+        SaveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                saveToFile();
+            }
+        });
 
-    private void setUpInvisibleEdges(){
+    }
+
+
+
+    private void setUpInvisibleEdges() {
         InvisibleEdges.selectedProperty().addListener((observable, oldValue, newValue) -> {
             scene3D.drawInvisibleEdges = newValue;
             scene3D.updateViewport();

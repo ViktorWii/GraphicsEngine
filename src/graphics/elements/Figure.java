@@ -9,6 +9,7 @@ public class Figure {
     public ArrayList<Polygon> polygons = new ArrayList<>();
     public ArrayList<Edge> edges = new ArrayList<>();
     public Set<Point> vertices = new HashSet<>();
+    private boolean checkPlane = true;
 
 
 
@@ -39,11 +40,15 @@ public class Figure {
         this.edges.addAll(edges);
         this.polygons.addAll(polygons);
 
-        for (Point vertex: vertices) {
+        for (Point vertex : vertices) {
             vertex.figure = this;
         }
     }
 
+
+    public void toggleCheckPlane() {
+        checkPlane = !checkPlane;
+    }
 
 
     public void translate(double[] translation) {
@@ -151,13 +156,14 @@ public class Figure {
 
 
     public double[] checkPlaneEquation(double[] planeEquation, double[] pointLocation) {
-        if (dotProduct(planeEquation, pointLocation) < 0) {
-            planeEquation[0] = -planeEquation[0];
-            planeEquation[1] = -planeEquation[1];
-            planeEquation[2] = -planeEquation[2];
-            planeEquation[3] = -planeEquation[3];
+        if (checkPlane) {
+            if (dotProduct(planeEquation, pointLocation) < 0) {
+                planeEquation[0] = -planeEquation[0];
+                planeEquation[1] = -planeEquation[1];
+                planeEquation[2] = -planeEquation[2];
+                planeEquation[3] = -planeEquation[3];
+            }
         }
-
         return planeEquation;
     }
 

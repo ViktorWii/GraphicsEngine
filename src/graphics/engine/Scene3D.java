@@ -44,9 +44,11 @@ public class Scene3D {
 //        platonicFigure = createPlatonicFigure(new OctahedronData());
 //        platonicFigure = createPlatonicFigure(new CubeData());
 //        platonicFigure = createPlatonicFigure(new DodecahedronData());
-        platonicFigure = createPlatonicFigure(new IcosahedronData());
-        controller.activeFigure = platonicFigure;
+//        platonicFigure = createPlatonicFigure(new IcosahedronData());
+        platonicFigure = createPlatonicFigure(new TorusData());
+//        platonicFigure.toggleCheckPlane();
 
+        controller.activeFigure = platonicFigure;
 
         updateViewport();
     }
@@ -196,11 +198,13 @@ public class Scene3D {
         }
 
         for (int i = 0; i < data.indices.length; i += data.step) {
-
             ArrayList<Point> polygonVertices = new ArrayList<>();
-            for (int j = 0; j < data.step; j++)
+            ArrayList<Integer> vertexIndices = new ArrayList<>();
+            for (int j = 0; j < data.step; j++) {
                 polygonVertices.add(vertices.get(data.indices[i + j]));
-            Polygon newPolygon = new Polygon(polygonVertices);
+                vertexIndices.add(data.indices[i + j]);
+            }
+            Polygon newPolygon = new Polygon(polygonVertices, vertexIndices);
             polygons.add(newPolygon);
             edges.addAll(newPolygon.edges);
         }
